@@ -1,3 +1,21 @@
+# Quarkus Swagger Upload File
+
+Demo project where you can upload a file using the swagger.
+
+## Instructions to run
+
+Run:
+```shell script
+./mvnw compile quarkus:dev
+```
+
+Access the swagger-ui at http://localhost:8080/q/swagger-ui
+
+Add the files you want to upload:
+![upload image](./assets/file-upload.PNG)
+
+
+
 # code-with-quarkus Project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.

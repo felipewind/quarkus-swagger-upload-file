@@ -1,18 +1,35 @@
 # Quarkus Swagger Upload File
 
-Demo project where you can upload a file using the swagger.
+Demo project where you can upload a file using the swagger. The endpoint, which is running on an executor thread, responds one 202 Accepted and send one event on a Vert.X Event Bus, that is processed on a worker thread asynchronously. 
+
+[Maximillian Arruda](https://github.com/dearrudam) taught me how to upload a file with the Swagger UI, all the credits are him.
 
 ## Instructions to run
 
-Run:
+Start the application:
 ```shell script
 ./mvnw compile quarkus:dev
 ```
 
 Access the swagger-ui at http://localhost:8080/q/swagger-ui
 
-Add the files you want to upload:
+Add the files you want to upload (the assets folder has two files for test):
 ![upload image](./assets/file-upload.PNG)
+
+Click **execute**.
+
+You'll receive one 202 Accepted.
+
+The application sends the Buffer from the files to a Vert.X Bus Event, where they are processed and the information is displayed.
+
+In the developer are of the browser (usually when you press F12), you can see the HTTP POST request with all data being sent to the server
+![http post request](./assets/upload-image-http-post.PNG)
+
+
+In the logs of the application, you'll see that the HTTP endpoint is provided by by one `executor thread` and the processing of the file is done by one `worker thread`:
+
+![log information](./assets/log-upload-file.PNG)
+
 
 
 

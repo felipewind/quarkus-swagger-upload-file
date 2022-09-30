@@ -58,20 +58,13 @@ public class UploadResource {
 
     // Class that will define the OpenAPI schema for the binary type input (upload)
     @Schema(type = SchemaType.STRING, format = "binary")
-    public interface UploadItemSchema {
-    }
-
-    // Class that will be used to define the request body, and with that
-    // it will allow uploading of "N" files
-    public class UploadFormSchema {
-        public List<UploadItemSchema> files;
-    }
+    public interface UploadItemSchema {}
 
     // We instruct OpenAPI to use the schema provided by the 'UploadFormSchema'
     // class implementation and thus define a valid OpenAPI schema for the Swagger
     // UI
-    @Schema(implementation = UploadFormSchema.class)
     public static class MultipartBody {
+        @Schema(implementation = UploadItemSchema[].class)
         @RestForm("files")
         public List<FileUpload> files;
     }
